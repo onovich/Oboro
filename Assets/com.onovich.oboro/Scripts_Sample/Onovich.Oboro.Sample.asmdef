@@ -1,7 +1,9 @@
 {
-    "name": "Onovich.SDF",
+    "name": "Onovich.Oboro.Sample",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "Onovich.Oboro"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -1,6 +1,6 @@
 using System;
 
-namespace Onovich.SDF.Inside {
+namespace Onovich.Oboro.Inside {
 
     internal static class ContourGridFactory {
 

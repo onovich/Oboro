@@ -1,13 +1,13 @@
 using UnityEngine;
 
-namespace Onovich.SDF.Sample.Inside {
+namespace Onovich.Oboro.Sample.Inside {
 
-    internal class SDFSampleInteractionController {
+    internal class OboroSampleInteractionController {
 
-        SDFSampleObstacleModel draggedObstacle;
+        OboroSampleObstacleModel draggedObstacle;
         Vector2 dragOffset;
 
-        internal void Tick(SDFSampleObstacleModel[] obstacles, Vector2 pointer, bool pointerDown, bool pointerHeld, bool pointerUp, int screenWidth, int screenHeight) {
+        internal void Tick(OboroSampleObstacleModel[] obstacles, Vector2 pointer, bool pointerDown, bool pointerHeld, bool pointerUp, int screenWidth, int screenHeight) {
             if (pointerDown) {
                 for (int i = obstacles.Length - 1; i >= 0; i--) {
                     var obstacle = obstacles[i];

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Onovich.SDF.Inside;
+using Onovich.Oboro.Inside;
 
-namespace Onovich.SDF {
+namespace Onovich.Oboro {
 
     public class ContourCore {
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Onovich.SDF {
+namespace Onovich.Oboro {
 
     public class ContourRendererCore {
 

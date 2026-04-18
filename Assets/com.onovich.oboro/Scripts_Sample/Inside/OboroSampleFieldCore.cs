@@ -1,23 +1,23 @@
 using UnityEngine;
-using Onovich.SDF;
+using Onovich.Oboro;
 
-namespace Onovich.SDF.Sample.Inside {
+namespace Onovich.Oboro.Sample.Inside {
 
-    internal class SDFSampleFieldCore {
+    internal class OboroSampleFieldCore {
 
-        readonly SDFSampleObstacleModel[] obstacles;
+        readonly OboroSampleObstacleModel[] obstacles;
         readonly ContourLevelModel[] contourLevels;
 
-        internal SDFSampleFieldCore() {
-            obstacles = SDFSampleFactory.CreateObstacles();
-            contourLevels = SDFSampleFactory.CreateContourLevels();
+        internal OboroSampleFieldCore() {
+            obstacles = OboroSampleFactory.CreateObstacles();
+            contourLevels = OboroSampleFactory.CreateContourLevels();
         }
 
-        internal SDFSampleObstacleModel[] Obstacles => obstacles;
+        internal OboroSampleObstacleModel[] Obstacles => obstacles;
         internal ContourLevelModel[] ContourLevels => contourLevels;
-        internal Color BackgroundColor => SDFSampleFactory.BackgroundColor;
-        internal int GridResolution => SDFSampleFactory.GridResolution;
-        internal float BackgroundTimeStep => SDFSampleFactory.BackgroundTimeStep;
+        internal Color BackgroundColor => OboroSampleFactory.BackgroundColor;
+        internal int GridResolution => OboroSampleFactory.GridResolution;
+        internal float BackgroundTimeStep => OboroSampleFactory.BackgroundTimeStep;
 
         internal void Resize(int screenWidth, int screenHeight) {
             float radiusScale = Mathf.Max(0.5f, Mathf.Min(screenWidth, screenHeight) / 1000f);

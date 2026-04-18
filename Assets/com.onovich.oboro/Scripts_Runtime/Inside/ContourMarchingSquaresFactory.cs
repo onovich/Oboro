@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Onovich.SDF.Inside {
+namespace Onovich.Oboro.Inside {
 
     internal static class ContourMarchingSquaresFactory {
 

@@ -1,23 +1,24 @@
 using UnityEngine;
-using Onovich.SDF.Sample.Inside;
+using Onovich.Oboro;
+using Onovich.Oboro.Sample.Inside;
 
-namespace Onovich.SDF.Sample {
+namespace Onovich.Oboro.Sample {
 
     [DefaultExecutionOrder(-1000)]
-    public class SDFSampleEntry : MonoBehaviour {
+    public class OboroSampleEntry : MonoBehaviour {
 
         ContourCore contourCore;
         ContourRendererCore contourRendererCore;
-        SDFSampleFieldCore fieldCore;
-        SDFSampleInteractionController interactionController;
+        OboroSampleFieldCore fieldCore;
+        OboroSampleInteractionController interactionController;
         Camera targetCamera;
         float elapsedTime;
 
         void Awake() {
             contourCore = new ContourCore();
             contourRendererCore = new ContourRendererCore();
-            fieldCore = new SDFSampleFieldCore();
-            interactionController = new SDFSampleInteractionController();
+            fieldCore = new OboroSampleFieldCore();
+            interactionController = new OboroSampleInteractionController();
 
             EnsureCamera();
             RefreshLayout(true);
@@ -70,13 +71,13 @@ namespace Onovich.SDF.Sample {
             }
 
             if (targetCamera == null) {
-                var cameraObject = new GameObject("SDF Sample Camera");
+                var cameraObject = new GameObject("Oboro Sample Camera");
                 targetCamera = cameraObject.AddComponent<Camera>();
                 targetCamera.tag = "MainCamera";
             }
 
             targetCamera.clearFlags = CameraClearFlags.SolidColor;
-            targetCamera.backgroundColor = fieldCore != null ? fieldCore.BackgroundColor : SDFSampleFactory.BackgroundColor;
+            targetCamera.backgroundColor = fieldCore != null ? fieldCore.BackgroundColor : OboroSampleFactory.BackgroundColor;
             targetCamera.orthographic = true;
             targetCamera.nearClipPlane = -10f;
             targetCamera.farClipPlane = 10f;

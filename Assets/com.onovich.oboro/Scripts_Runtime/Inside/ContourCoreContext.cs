@@ -1,4 +1,4 @@
-namespace Onovich.SDF.Inside {
+namespace Onovich.Oboro.Inside {
 
     internal class ContourCoreContext {
 

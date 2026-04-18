@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-namespace Onovich.SDF.Sample {
+namespace Onovich.Oboro.Sample {
 
     [Serializable]
-    public class SDFSampleObstacleModel {
+    public class OboroSampleObstacleModel {
 
         public float relativeX;
         public float relativeY;
@@ -14,7 +14,7 @@ namespace Onovich.SDF.Sample {
         public float y;
         public float radius;
 
-        public SDFSampleObstacleModel(float relativeX, float relativeY, float baseRadius, float intensity) {
+        public OboroSampleObstacleModel(float relativeX, float relativeY, float baseRadius, float intensity) {
             this.relativeX = relativeX;
             this.relativeY = relativeY;
             this.baseRadius = baseRadius;

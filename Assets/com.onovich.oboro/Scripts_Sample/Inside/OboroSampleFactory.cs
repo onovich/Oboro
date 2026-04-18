@@ -1,9 +1,9 @@
 using UnityEngine;
-using Onovich.SDF;
+using Onovich.Oboro;
 
-namespace Onovich.SDF.Sample.Inside {
+namespace Onovich.Oboro.Sample.Inside {
 
-    internal static class SDFSampleFactory {
+    internal static class OboroSampleFactory {
 
         internal const int GridResolution = 8;
         internal const float BackgroundTimeStep = 0.02f;
@@ -32,16 +32,16 @@ namespace Onovich.SDF.Sample.Inside {
             };
         }
 
-        internal static SDFSampleObstacleModel[] CreateObstacles() {
+        internal static OboroSampleObstacleModel[] CreateObstacles() {
             return new[] {
-                new SDFSampleObstacleModel(0.15f, 0.25f, 90f, 1.8f),
-                new SDFSampleObstacleModel(0.35f, 0.45f, 160f, 5.0f),
-                new SDFSampleObstacleModel(0.65f, 0.35f, 130f, 3.2f),
-                new SDFSampleObstacleModel(0.85f, 0.20f, 85f, 1.5f),
-                new SDFSampleObstacleModel(0.50f, 0.70f, 180f, 6.5f),
-                new SDFSampleObstacleModel(0.20f, 0.75f, 110f, 2.5f),
-                new SDFSampleObstacleModel(0.80f, 0.70f, 140f, 4.0f),
-                new SDFSampleObstacleModel(0.50f, 0.15f, 75f, 1.2f)
+                new OboroSampleObstacleModel(0.15f, 0.25f, 90f, 1.8f),
+                new OboroSampleObstacleModel(0.35f, 0.45f, 160f, 5.0f),
+                new OboroSampleObstacleModel(0.65f, 0.35f, 130f, 3.2f),
+                new OboroSampleObstacleModel(0.85f, 0.20f, 85f, 1.5f),
+                new OboroSampleObstacleModel(0.50f, 0.70f, 180f, 6.5f),
+                new OboroSampleObstacleModel(0.20f, 0.75f, 110f, 2.5f),
+                new OboroSampleObstacleModel(0.80f, 0.70f, 140f, 4.0f),
+                new OboroSampleObstacleModel(0.50f, 0.15f, 75f, 1.2f)
             };
         }
 
