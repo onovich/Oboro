@@ -1,15 +1,16 @@
 using UnityEngine;
 
-namespace SdfSample.Common.Contours;
-
-public readonly struct ContourLevel
+namespace SdfSample.Common.Contours
 {
-    public readonly float Value;
-    public readonly Color Color;
-
-    public ContourLevel(float value, Color color)
+    public readonly struct ContourLevel
     {
-        Value = value;
-        Color = color;
+        public readonly float Value;
+        public readonly Color Color;
+
+        public ContourLevel(float value, Color color)
+        {
+            Value = value;
+            Color = color;
+        }
     }
 }

@@ -1,19 +1,20 @@
 using System;
 
-namespace SdfSample.Common.Contours;
-
-public static class ScalarFieldGridBuilder
+namespace SdfSample.Common.Contours
 {
-    public static void Build(float[] buffer, int columns, int rows, float cellSize, Func<float, float, float> evaluator)
+    public static class ScalarFieldGridBuilder
     {
-        for (var row = 0; row <= rows; row++)
+        public static void Build(float[] buffer, int columns, int rows, float cellSize, Func<float, float, float> evaluator)
         {
-            var y = row * cellSize;
-            var rowOffset = row * (columns + 1);
-            for (var column = 0; column <= columns; column++)
+            for (var row = 0; row <= rows; row++)
             {
-                var x = column * cellSize;
-                buffer[rowOffset + column] = evaluator(x, y);
+                var y = row * cellSize;
+                var rowOffset = row * (columns + 1);
+                for (var column = 0; column <= columns; column++)
+                {
+                    var x = column * cellSize;
+                    buffer[rowOffset + column] = evaluator(x, y);
+                }
             }
         }
     }

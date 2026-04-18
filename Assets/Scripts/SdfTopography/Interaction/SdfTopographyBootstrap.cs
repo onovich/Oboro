@@ -1,22 +1,23 @@
 using UnityEngine;
 using SdfSample.SdfTopography.Rendering;
 
-namespace SdfSample.SdfTopography.Interaction;
-
-public static class SdfTopographyBootstrap
+namespace SdfSample.SdfTopography.Interaction
 {
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void Bootstrap()
+    public static class SdfTopographyBootstrap
     {
-        if (Object.FindFirstObjectByType<SdfTopographyRenderer>() != null)
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void Bootstrap()
         {
-            return;
+            if (Object.FindFirstObjectByType<SdfTopographyRenderer>() != null)
+            {
+                return;
+            }
+
+            Application.targetFrameRate = 60;
+
+            var root = new GameObject("SDF Topography Renderer");
+            Object.DontDestroyOnLoad(root);
+            root.AddComponent<SdfTopographyRenderer>();
         }
-
-        Application.targetFrameRate = 60;
-
-        var root = new GameObject("SDF Topography Renderer");
-        Object.DontDestroyOnLoad(root);
-        root.AddComponent<SdfTopographyRenderer>();
     }
 }
