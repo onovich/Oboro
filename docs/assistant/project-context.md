@@ -186,6 +186,15 @@
 - 旧路径文本主要存在于 Unity 再生成缓存、布局和历史日志中，通常不是源码层问题。
 - Sample 入口已改为显式场景挂载，不再使用 `OboroSampleBootstrap`。
 
+## 8.1 GPU 点击镜像问题总结
+
+- 症状：开启 `preferGpuRenderer` 后，点击命中区域与可视物体上下完全镜像；左右移动正常，但向上拖拽会视觉上向下移动。
+- 定位方法：把 `preferGpuRenderer` 临时关闭后，点击与拖拽立即恢复正常，因此可以排除共享交互逻辑，问题只在 GPU 渲染路径。
+- 根因：GPU 全屏 sample 渲染把最终图像做了额外的 Y 方向翻转，导致视觉输出与 `OboroSampleEntry` / `OboroSampleInteractionController` 使用的顶部原点屏幕坐标不一致。
+- 容易犯错的点：不要同时在 shader、fullscreen mesh、和 C# obstacle 上传链路里来回补偿 Y；那会形成相互抵消或重复翻转，表现上看起来像“改了也没改”。
+- 最终修复：保持交互与 obstacle 数据都使用同一套顶部原点屏幕坐标，只移除 GPU shader 取样中的多余 Y 翻转，使 GPU 画面与 CPU contour 路径一致。
+- 经验规则：当 `preferGpuRenderer = false` 时表现正常，就优先怀疑 GPU 呈现层整体坐标系，而不是先改共享输入逻辑。
+
 ## 9. 后续会话接手建议
 
 如果未来会话要继续推进，优先考虑以下方向：

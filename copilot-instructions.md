@@ -50,6 +50,9 @@
 - Batchmode Unity compile under the new path was rechecked successfully on `2026-04-18`.
 - Most remaining old-path references are expected only in Unity-generated caches, logs, or local layouts.
 - `OboroSampleBootstrap` has been removed; the sample entry is now scene-owned.
+- GPU sample interaction bug was traced to a full-screen render Y-orientation mismatch, not to the shared mouse interaction logic.
+- Key regression test: if `preferGpuRenderer = false` and clicking becomes correct, the bug is in the GPU render path rather than the common interaction path.
+- Current fix keeps obstacle data in the same top-left-origin convention as interaction and removes the extra shader-side Y inversion that mirrored the final image.
 
 ## Validation Workflow
 

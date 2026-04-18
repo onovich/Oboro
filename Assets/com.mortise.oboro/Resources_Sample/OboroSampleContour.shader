@@ -66,7 +66,7 @@ Shader "Hidden/Onovich/OboroSampleContour" {
             }
 
             fixed4 frag(v2f input) : SV_Target {
-                float2 pixelPosition = float2(input.uv.x * _ScreenSize.x, (1.0 - input.uv.y) * _ScreenSize.y);
+                float2 pixelPosition = input.uv * _ScreenSize.xy;
                 float field = EvaluateField(pixelPosition);
                 float fieldWidth = max(fwidth(field), 1e-4);
 
