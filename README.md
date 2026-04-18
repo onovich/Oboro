@@ -39,4 +39,4 @@ Oboro 目前适合：
 
 可通过 Git URL 引入：
 
-`ssh://git@github.com/onovich/SDFSample.git?path=/Assets/com.onovich.oboro#main`
+`ssh://git@github.com/onovich/Oboro.git?path=/Assets/com.onovich.oboro#main`
