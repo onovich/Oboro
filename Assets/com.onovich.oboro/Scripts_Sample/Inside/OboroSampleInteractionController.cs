@@ -7,9 +7,10 @@ namespace Onovich.Oboro.Sample.Inside {
         OboroSampleObstacleModel draggedObstacle;
         Vector2 dragOffset;
 
-        internal void Tick(OboroSampleObstacleModel[] obstacles, Vector2 pointer, bool pointerDown, bool pointerHeld, bool pointerUp, int screenWidth, int screenHeight) {
+        internal bool Tick(OboroSampleObstacleModel[] obstacles, Vector2 pointer, bool pointerDown, bool pointerHeld, bool pointerUp, int screenWidth, int screenHeight) {
             float pointerX = pointer.x;
             float pointerY = pointer.y;
+            bool obstacleStateChanged = false;
 
             if (pointerDown) {
                 for (int i = obstacles.Length - 1; i >= 0; i--) {
@@ -25,15 +26,23 @@ namespace Onovich.Oboro.Sample.Inside {
             }
 
             if (draggedObstacle != null && pointerHeld) {
-                draggedObstacle.x = pointerX - dragOffset.x;
-                draggedObstacle.y = pointerY - dragOffset.y;
-                draggedObstacle.relativeX = Mathf.Clamp01(draggedObstacle.x / screenWidth);
-                draggedObstacle.relativeY = Mathf.Clamp01(draggedObstacle.y / screenHeight);
+                float nextX = pointerX - dragOffset.x;
+                float nextY = pointerY - dragOffset.y;
+
+                if (!Mathf.Approximately(draggedObstacle.x, nextX) || !Mathf.Approximately(draggedObstacle.y, nextY)) {
+                    draggedObstacle.x = nextX;
+                    draggedObstacle.y = nextY;
+                    draggedObstacle.relativeX = Mathf.Clamp01(draggedObstacle.x / screenWidth);
+                    draggedObstacle.relativeY = Mathf.Clamp01(draggedObstacle.y / screenHeight);
+                    obstacleStateChanged = true;
+                }
             }
 
             if (pointerUp) {
                 draggedObstacle = null;
             }
+
+            return obstacleStateChanged;
         }
 
     }

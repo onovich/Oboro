@@ -80,7 +80,7 @@
 
 - `OboroSampleEntry`
   - 真正的示例运行入口
-  - 串联 runtime、field、interaction、camera 与 render 生命周期
+  - 串联 runtime / gpu sample renderer、field、interaction、camera 与 render 生命周期
 - `OboroSampleFieldCore`
   - 管理障碍体与 contour level 配置
   - 定义 sample 的标量场求值逻辑
@@ -98,6 +98,8 @@
 - 不要重新引入自动 Bootstrap 来隐式创建入口对象。
   - 当前约定是由场景显式挂载 `OboroSampleEntry`
   - 这样更利于上层用户测试、场景控制与 smoke 验证
+- Sample 当前默认优先使用 GPU 全屏 pass，以降低 DrawCall 之外的 CPU 轮廓提取开销。
+  - CPU contour 路径仍保留，作为 Runtime 能力与 fallback
 
 ## 5. 代码编码风格
 

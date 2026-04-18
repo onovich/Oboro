@@ -7,9 +7,12 @@ namespace Onovich.Oboro.Sample {
     [DefaultExecutionOrder(-1000)]
     public class OboroSampleEntry : MonoBehaviour {
 
+        [SerializeField] bool preferGpuRenderer = true;
+
         ContourCore contourCore;
         ContourRendererCore contourRendererCore;
         OboroSampleFieldCore fieldCore;
+        OboroSampleGpuRendererCore gpuRendererCore;
         OboroSampleInteractionController interactionController;
         readonly System.Action<ContourLevelModel, Vector2, Vector2> emitContourHandler;
         readonly System.Func<float, float, float> fieldEvaluator;
@@ -25,6 +28,7 @@ namespace Onovich.Oboro.Sample {
             contourCore = new ContourCore();
             contourRendererCore = new ContourRendererCore();
             fieldCore = new OboroSampleFieldCore();
+            gpuRendererCore = new OboroSampleGpuRendererCore();
             interactionController = new OboroSampleInteractionController();
 
             EnsureCamera();
@@ -40,7 +44,7 @@ namespace Onovich.Oboro.Sample {
             elapsedTime += fieldCore.BackgroundTimeStep;
             RefreshLayout(false);
 
-            interactionController.Tick(
+            bool obstacleStateChanged = interactionController.Tick(
                 fieldCore.Obstacles,
                 GetPointerPosition(),
                 Input.GetMouseButtonDown(0),
@@ -48,6 +52,10 @@ namespace Onovich.Oboro.Sample {
                 Input.GetMouseButtonUp(0),
                 contourCore.ScreenWidth,
                 contourCore.ScreenHeight);
+
+            if (obstacleStateChanged) {
+                fieldCore.MarkObstacleStateDirty();
+            }
         }
 
         void OnRenderObject() {
@@ -57,6 +65,12 @@ namespace Onovich.Oboro.Sample {
             if (targetCamera == null || Camera.current != targetCamera) {
                 return;
             }
+
+            if (preferGpuRenderer && gpuRendererCore.Prepare(fieldCore)) {
+                gpuRendererCore.Render(fieldCore, elapsedTime, contourCore.ScreenWidth, contourCore.ScreenHeight);
+                return;
+            }
+
             if (!contourRendererCore.Prepare()) {
                 return;
             }
@@ -69,6 +83,7 @@ namespace Onovich.Oboro.Sample {
 
         void OnDestroy() {
             contourRendererCore.TearDown();
+            gpuRendererCore?.TearDown();
         }
 
         void EnsureCamera() {

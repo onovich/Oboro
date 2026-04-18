@@ -7,10 +7,12 @@ namespace Onovich.Oboro.Sample.Inside {
 
         readonly OboroSampleObstacleModel[] obstacles;
         readonly ContourLevelModel[] contourLevels;
+        bool obstacleStateDirty;
 
         internal OboroSampleFieldCore() {
             obstacles = OboroSampleFactory.CreateObstacles();
             contourLevels = OboroSampleFactory.CreateContourLevels();
+            obstacleStateDirty = true;
         }
 
         internal OboroSampleObstacleModel[] Obstacles => obstacles;
@@ -24,6 +26,8 @@ namespace Onovich.Oboro.Sample.Inside {
             for (int i = 0; i < obstacles.Length; i++) {
                 obstacles[i].UpdateLayout(screenWidth, screenHeight, radiusScale);
             }
+
+            obstacleStateDirty = true;
         }
 
         internal float Evaluate(float x, float y, float time) {
@@ -41,6 +45,16 @@ namespace Onovich.Oboro.Sample.Inside {
             }
 
             return value;
+        }
+
+        internal void MarkObstacleStateDirty() {
+            obstacleStateDirty = true;
+        }
+
+        internal bool ConsumeObstacleStateDirty() {
+            bool wasDirty = obstacleStateDirty;
+            obstacleStateDirty = false;
+            return wasDirty;
         }
 
     }
