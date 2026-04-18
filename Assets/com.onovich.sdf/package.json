@@ -1,0 +1,19 @@
+{
+    "name": "com.onovich.sdf",
+    "version": "0.0.1",
+    "unity": "2023.2",
+    "author": {
+        "name": "onovich",
+        "email": "onovich1110@gmail.com"
+    },
+    "displayName": "Onovich.SDF",
+    "description": "A contour-based SDF rendering runtime and sample package.",
+    "documentationURL": "https://github.com/onovich/SDFSample",
+    "hideInEditor": false,
+    "category": "Rendering",
+    "keywords": [
+        "SDF",
+        "contour",
+        "rendering"
+    ]
+}
