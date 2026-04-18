@@ -26,14 +26,42 @@ Oboro 目前适合：
 
 ## Sample
 
-示例入口位于：
+示例运行组件位于：
 - [Assets/com.onovich.oboro/Scripts_Sample/OboroSampleEntry.cs](Assets/com.onovich.oboro/Scripts_Sample/OboroSampleEntry.cs)
-- [Assets/com.onovich.oboro/Scripts_Sample/OboroSampleBootstrap.cs](Assets/com.onovich.oboro/Scripts_Sample/OboroSampleBootstrap.cs)
+
+默认示例场景位于：
+- [Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity](Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity)
+
+当前约定是**手动在场景对象上挂载** `OboroSampleEntry`，不再通过自动 Bootstrap 脚本创建入口，以免干扰上层用户测试。
 
 运行后可看到：
 - 动态 SDF 等高线层次。
 - 多个软融合障碍体形成的地形起伏。
 - 鼠标拖拽障碍体时实时更新轮廓。
+
+## Validation
+
+### Headless Compile
+
+可使用 Unity 批处理模式在项目根目录做无头编译校验：
+
+运行前请先关闭已打开 `D:/UnityProjects/Oboro` 的所有 Unity Editor 实例，否则 Unity 会因为项目锁直接失败。
+
+`"D:/UnityEditors/Unity 2023.2.22f1/Editor/Unity.exe" -batchmode -nographics -projectPath "D:/UnityProjects/Oboro" -executeMethod Onovich.Oboro.Editor.OboroBatchValidation.CompileProject -quit -logFile "D:/UnityProjects/Oboro/Temp/oboro-compile.log"`
+
+### PlayMode Smoke Test
+
+可使用同一个批处理入口启动 Sample 场景并运行一次无头 PlayMode smoke 测试：
+
+运行前同样需要关闭已打开当前项目的 Unity 实例。
+
+`"D:/UnityEditors/Unity 2023.2.22f1/Editor/Unity.exe" -batchmode -nographics -projectPath "D:/UnityProjects/Oboro" -executeMethod Onovich.Oboro.Editor.OboroBatchValidation.PlayModeSmokeSampleEntry -logFile "D:/UnityProjects/Oboro/Temp/oboro-smoke.log"`
+
+该 smoke 测试会：
+- 打开 `Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity`
+- 进入 PlayMode
+- 短时间运行并监听 Error / Exception / Assert
+- 无报错则以成功退出
 
 ## UPM URL
 

@@ -13,10 +13,12 @@ namespace Onovich.Oboro.Inside {
             new[] { new[] { 1, 3 } }, new[] { new[] { 1, 2 } }, new[] { new[] { 2, 3 } }, Array.Empty<int[]>()
         };
 
-        internal static void Emit(float[] grid, int columns, int rows, float cellSize, IReadOnlyList<ContourLevelModel> contourLevels, Action<ContourLevelModel, Vector2, Vector2> emitHandle) {
+        internal static void Emit(float[] grid, float[] xPositions, float[] yPositions, int columns, int rows, int rowStride, float cellSize, IReadOnlyList<ContourLevelModel> contourLevels, Action<ContourLevelModel, Vector2, Vector2> emitHandle) {
+            int contourLevelCount = contourLevels.Count;
             for (int row = 0; row < rows; row++) {
-                int rowOffset = row * (columns + 1);
-                int nextRowOffset = (row + 1) * (columns + 1);
+                int rowOffset = row * rowStride;
+                int nextRowOffset = (row + 1) * rowStride;
+                float y = yPositions[row];
 
                 for (int column = 0; column < columns; column++) {
                     float vTL = grid[rowOffset + column];
@@ -26,12 +28,14 @@ namespace Onovich.Oboro.Inside {
 
                     float minV = Mathf.Min(vTL, vTR, vBL, vBR);
                     float maxV = Mathf.Max(vTL, vTR, vBL, vBR);
-                    float x = column * cellSize;
-                    float y = row * cellSize;
+                    float x = xPositions[column];
 
-                    for (int i = 0; i < contourLevels.Count; i++) {
+                    for (int i = 0; i < contourLevelCount; i++) {
                         var level = contourLevels[i];
                         if (level.value <= minV || level.value > maxV) {
+                            if (level.value > maxV) {
+                                break;
+                            }
                             continue;
                         }
 

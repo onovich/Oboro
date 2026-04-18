@@ -36,9 +36,8 @@ namespace Onovich.Oboro.Sample.Inside {
                 var obstacle = obstacles[i];
                 float dx = x - obstacle.x;
                 float dy = y - obstacle.y;
-                float softCore = obstacle.radius * 0.22f;
-                float distSq = dx * dx + dy * dy + softCore * softCore;
-                value += (obstacle.radius * obstacle.radius) / distSq * obstacle.intensity;
+                float distSq = dx * dx + dy * dy + obstacle.softCoreSquared;
+                value += obstacle.radiusSquared / distSq * obstacle.intensity;
             }
 
             return value;

@@ -11,8 +11,15 @@ namespace Onovich.Oboro.Sample {
         ContourRendererCore contourRendererCore;
         OboroSampleFieldCore fieldCore;
         OboroSampleInteractionController interactionController;
+        readonly System.Action<ContourLevelModel, Vector2, Vector2> emitContourHandler;
+        readonly System.Func<float, float, float> fieldEvaluator;
         Camera targetCamera;
         float elapsedTime;
+
+        public OboroSampleEntry() {
+            emitContourHandler = EmitContour;
+            fieldEvaluator = EvaluateField;
+        }
 
         void Awake() {
             contourCore = new ContourCore();
@@ -55,8 +62,8 @@ namespace Onovich.Oboro.Sample {
             }
 
             contourRendererCore.Begin(contourCore.ScreenWidth, contourCore.ScreenHeight);
-            contourCore.BuildField(delegate(float x, float y) { return fieldCore.Evaluate(x, y, elapsedTime); });
-            contourCore.EmitContour(fieldCore.ContourLevels, EmitContour);
+            contourCore.BuildField(fieldEvaluator);
+            contourCore.EmitContour(fieldCore.ContourLevels, emitContourHandler);
             contourRendererCore.End();
         }
 
@@ -99,6 +106,10 @@ namespace Onovich.Oboro.Sample {
         Vector2 GetPointerPosition() {
             var mousePosition = Input.mousePosition;
             return new Vector2(mousePosition.x, contourCore.ScreenHeight - mousePosition.y);
+        }
+
+        float EvaluateField(float x, float y) {
+            return fieldCore.Evaluate(x, y, elapsedTime);
         }
 
         void EmitContour(ContourLevelModel level, Vector2 start, Vector2 end) {

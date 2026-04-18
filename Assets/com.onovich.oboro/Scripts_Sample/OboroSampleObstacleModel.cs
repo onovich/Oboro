@@ -13,6 +13,8 @@ namespace Onovich.Oboro.Sample {
         public float x;
         public float y;
         public float radius;
+        public float radiusSquared;
+        public float softCoreSquared;
 
         public OboroSampleObstacleModel(float relativeX, float relativeY, float baseRadius, float intensity) {
             this.relativeX = relativeX;
@@ -25,10 +27,15 @@ namespace Onovich.Oboro.Sample {
             x = screenWidth * relativeX;
             y = screenHeight * relativeY;
             radius = baseRadius * radiusScale;
+            radiusSquared = radius * radius;
+            float softCore = radius * 0.22f;
+            softCoreSquared = softCore * softCore;
         }
 
-        public bool Contains(Vector2 point) {
-            return Vector2.Distance(point, new Vector2(x, y)) < radius;
+        public bool Contains(float pointX, float pointY) {
+            float dx = pointX - x;
+            float dy = pointY - y;
+            return dx * dx + dy * dy < radiusSquared;
         }
 
     }
