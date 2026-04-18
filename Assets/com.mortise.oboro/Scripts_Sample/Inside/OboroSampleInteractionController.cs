@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace MortiseFrame.Oboro.Sample.Inside {
 
@@ -7,13 +8,13 @@ namespace MortiseFrame.Oboro.Sample.Inside {
         OboroSampleObstacleModel draggedObstacle;
         Vector2 dragOffset;
 
-        internal bool Tick(OboroSampleObstacleModel[] obstacles, Vector2 pointer, bool pointerDown, bool pointerHeld, bool pointerUp, int screenWidth, int screenHeight) {
+        internal bool Tick(IReadOnlyList<OboroSampleObstacleModel> obstacles, Vector2 pointer, bool pointerDown, bool pointerHeld, bool pointerUp, int screenWidth, int screenHeight) {
             float pointerX = pointer.x;
             float pointerY = pointer.y;
             bool obstacleStateChanged = false;
 
             if (pointerDown) {
-                for (int i = obstacles.Length - 1; i >= 0; i--) {
+                for (int i = obstacles.Count - 1; i >= 0; i--) {
                     var obstacle = obstacles[i];
                     if (!obstacle.Contains(pointerX, pointerY)) {
                         continue;

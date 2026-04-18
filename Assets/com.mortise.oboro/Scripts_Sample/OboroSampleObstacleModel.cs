@@ -23,6 +23,10 @@ namespace MortiseFrame.Oboro.Sample {
             this.intensity = intensity;
         }
 
+        public OboroSampleObstacleModel Clone() {
+            return new OboroSampleObstacleModel(relativeX, relativeY, baseRadius, intensity);
+        }
+
         public void UpdateLayout(float screenWidth, float screenHeight, float radiusScale) {
             x = screenWidth * relativeX;
             y = screenHeight * relativeY;

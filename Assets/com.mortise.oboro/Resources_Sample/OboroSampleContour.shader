@@ -33,6 +33,7 @@ Shader "Hidden/Onovich/OboroSampleContour" {
             float _LineThickness;
             float _LineFeather;
             float _DisturbanceIntensity;
+            float _DisturbancePhase;
             int _ObstacleCount;
             float4 _ObstacleData[MAX_OBSTACLES];
             int _ContourCount;
@@ -57,9 +58,9 @@ Shader "Hidden/Onovich/OboroSampleContour" {
 
             float EvaluateField(float2 pixelPosition) {
                 float rawValue =
-                    (sin(pixelPosition.x * 0.002 + _TimeValue * 0.4) +
-                     cos(pixelPosition.y * 0.0025 - _TimeValue * 0.3) +
-                     sin((pixelPosition.x + pixelPosition.y) * 0.0015 + _TimeValue * 0.2)) * 1.5;
+                    (sin(pixelPosition.x * 0.002 + _TimeValue * 0.4 + _DisturbancePhase) +
+                     cos(pixelPosition.y * 0.0025 - _TimeValue * 0.3 + _DisturbancePhase) +
+                     sin((pixelPosition.x + pixelPosition.y) * 0.0015 + _TimeValue * 0.2 + _DisturbancePhase)) * 1.5;
 
                 float normalizedDisturbance = saturate(rawValue / 9.0 + 0.5);
                 float value = (SampleDisturbanceCurve(normalizedDisturbance) - 0.5) * 9.0 * _DisturbanceIntensity;

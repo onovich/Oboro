@@ -1,11 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace MortiseFrame.Oboro.Sample.Inside {
 
     internal sealed class OboroSampleGpuRendererCore {
 
         const string ShaderName = "Hidden/Onovich/OboroSampleContour";
-        const float LineThickness = 0.85f;
         const float LineFeather = 0.75f;
 
         static readonly int ScreenSizeId = Shader.PropertyToID("_ScreenSize");
@@ -19,6 +19,7 @@ namespace MortiseFrame.Oboro.Sample.Inside {
         static readonly int LineFeatherId = Shader.PropertyToID("_LineFeather");
         static readonly int DisturbanceIntensityId = Shader.PropertyToID("_DisturbanceIntensity");
         static readonly int DisturbanceCurveId = Shader.PropertyToID("_DisturbanceCurve");
+        static readonly int DisturbancePhaseId = Shader.PropertyToID("_DisturbancePhase");
 
         Material material;
         Mesh fullscreenMesh;
@@ -43,17 +44,22 @@ namespace MortiseFrame.Oboro.Sample.Inside {
             return true;
         }
 
-        internal void Render(OboroSampleFieldCore fieldCore, float elapsedTime, int screenWidth, int screenHeight, float disturbanceIntensity, float[] disturbanceCurveSamples) {
+        internal void Render(OboroSampleFieldCore fieldCore, float elapsedTime, int screenWidth, int screenHeight, float disturbanceIntensity, float disturbancePhase, float lineThickness, float[] disturbanceCurveSamples) {
             if (fieldCore.ConsumeObstacleStateDirty()) {
                 UploadObstacleData(fieldCore.Obstacles);
             }
 
+            if (fieldCore.ConsumeContourStateDirty()) {
+                UploadContourData(fieldCore.ContourLevels);
+            }
+
             material.SetVector(ScreenSizeId, new Vector4(screenWidth, screenHeight, 0f, 0f));
             material.SetFloat(TimeValueId, elapsedTime);
-            material.SetFloat(LineThicknessId, LineThickness);
+            material.SetFloat(LineThicknessId, lineThickness);
             material.SetFloat(LineFeatherId, LineFeather);
             material.SetFloat(DisturbanceIntensityId, disturbanceIntensity);
             material.SetFloatArray(DisturbanceCurveId, disturbanceCurveSamples);
+            material.SetFloat(DisturbancePhaseId, disturbancePhase);
 
             material.SetPass(0);
             Graphics.DrawMeshNow(fullscreenMesh, Matrix4x4.identity);
@@ -86,27 +92,31 @@ namespace MortiseFrame.Oboro.Sample.Inside {
             }
 
             if (!contourDataUploaded) {
-                for (int i = 0; i < levels.Length; i++) {
-                    ContourLevelModel level = levels[i];
-                    contourValues[i] = level.value;
-                    contourColors[i] = level.color;
-                }
-
-                material.SetInt(ContourCountId, contourValues.Length);
-                material.SetFloatArray(ContourValuesId, contourValues);
-                material.SetVectorArray(ContourColorsId, contourColors);
-                contourDataUploaded = true;
+                UploadContourData(levels);
             }
         }
 
-        void UploadObstacleData(OboroSampleObstacleModel[] obstacles) {
-            for (int i = 0; i < obstacles.Length; i++) {
+        void UploadObstacleData(IReadOnlyList<OboroSampleObstacleModel> obstacles) {
+            for (int i = 0; i < obstacles.Count; i++) {
                 var obstacle = obstacles[i];
-            obstacleData[i] = new Vector4(obstacle.x, obstacle.y, obstacle.radiusSquared * obstacle.intensity, obstacle.softCoreSquared);
+                obstacleData[i] = new Vector4(obstacle.x, obstacle.y, obstacle.radiusSquared * obstacle.intensity, obstacle.softCoreSquared);
             }
 
-            material.SetInt(ObstacleCountId, obstacles.Length);
+            material.SetInt(ObstacleCountId, obstacles.Count);
             material.SetVectorArray(ObstacleDataId, obstacleData);
+        }
+
+        void UploadContourData(ContourLevelModel[] levels) {
+            for (int i = 0; i < levels.Length; i++) {
+                ContourLevelModel level = levels[i];
+                contourValues[i] = level.value;
+                contourColors[i] = level.color;
+            }
+
+            material.SetInt(ContourCountId, contourValues.Length);
+            material.SetFloatArray(ContourValuesId, contourValues);
+            material.SetVectorArray(ContourColorsId, contourColors);
+            contourDataUploaded = true;
         }
 
         void EnsureFullscreenMesh() {
