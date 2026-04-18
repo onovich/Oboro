@@ -8,6 +8,10 @@ namespace MortiseFrame.Oboro.Sample {
     public class OboroSampleEntry : MonoBehaviour {
 
         [SerializeField] bool preferGpuRenderer = true;
+        [Header("Disturbance")]
+        [SerializeField] [Min(0f)] float disturbanceIntensity = 1f;
+        [SerializeField] [Min(0f)] float disturbanceTimeScale = 1f;
+        [SerializeField] AnimationCurve disturbanceCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 
         ContourCore contourCore;
         ContourRendererCore contourRendererCore;
@@ -16,12 +20,14 @@ namespace MortiseFrame.Oboro.Sample {
         OboroSampleInteractionController interactionController;
         readonly System.Action<ContourLevelModel, Vector2, Vector2> emitContourHandler;
         readonly System.Func<float, float, float> fieldEvaluator;
+        readonly float[] disturbanceCurveSamples;
         Camera targetCamera;
         float elapsedTime;
 
         public OboroSampleEntry() {
             emitContourHandler = EmitContour;
             fieldEvaluator = EvaluateField;
+            disturbanceCurveSamples = new float[OboroSampleFieldCore.DisturbanceCurveSampleCount];
         }
 
         void Awake() {
@@ -31,17 +37,20 @@ namespace MortiseFrame.Oboro.Sample {
             gpuRendererCore = new OboroSampleGpuRendererCore();
             interactionController = new OboroSampleInteractionController();
 
+            SyncDisturbanceCurveSamples();
             EnsureCamera();
             RefreshLayout(true);
         }
 
         void OnEnable() {
+            SyncDisturbanceCurveSamples();
             EnsureCamera();
             RefreshLayout(true);
         }
 
         void Update() {
-            elapsedTime += fieldCore.BackgroundTimeStep;
+            SyncDisturbanceCurveSamples();
+            elapsedTime += fieldCore.BackgroundTimeStep * disturbanceTimeScale;
             RefreshLayout(false);
 
             bool obstacleStateChanged = interactionController.Tick(
@@ -67,7 +76,7 @@ namespace MortiseFrame.Oboro.Sample {
             }
 
             if (preferGpuRenderer && gpuRendererCore.Prepare(fieldCore)) {
-                gpuRendererCore.Render(fieldCore, elapsedTime, contourCore.ScreenWidth, contourCore.ScreenHeight);
+                gpuRendererCore.Render(fieldCore, elapsedTime, contourCore.ScreenWidth, contourCore.ScreenHeight, disturbanceIntensity, disturbanceCurveSamples);
                 return;
             }
 
@@ -124,7 +133,11 @@ namespace MortiseFrame.Oboro.Sample {
         }
 
         float EvaluateField(float x, float y) {
-            return fieldCore.Evaluate(x, y, elapsedTime);
+            return fieldCore.Evaluate(x, y, elapsedTime, disturbanceIntensity, disturbanceCurveSamples);
+        }
+
+        void SyncDisturbanceCurveSamples() {
+            OboroSampleFieldCore.SampleDisturbanceCurve(disturbanceCurve, disturbanceCurveSamples);
         }
 
         void EmitContour(ContourLevelModel level, Vector2 start, Vector2 end) {

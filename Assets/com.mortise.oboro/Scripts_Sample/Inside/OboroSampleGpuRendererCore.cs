@@ -17,6 +17,8 @@ namespace MortiseFrame.Oboro.Sample.Inside {
         static readonly int ContourColorsId = Shader.PropertyToID("_ContourColors");
         static readonly int LineThicknessId = Shader.PropertyToID("_LineThickness");
         static readonly int LineFeatherId = Shader.PropertyToID("_LineFeather");
+        static readonly int DisturbanceIntensityId = Shader.PropertyToID("_DisturbanceIntensity");
+        static readonly int DisturbanceCurveId = Shader.PropertyToID("_DisturbanceCurve");
 
         Material material;
         Mesh fullscreenMesh;
@@ -41,7 +43,7 @@ namespace MortiseFrame.Oboro.Sample.Inside {
             return true;
         }
 
-        internal void Render(OboroSampleFieldCore fieldCore, float elapsedTime, int screenWidth, int screenHeight) {
+        internal void Render(OboroSampleFieldCore fieldCore, float elapsedTime, int screenWidth, int screenHeight, float disturbanceIntensity, float[] disturbanceCurveSamples) {
             if (fieldCore.ConsumeObstacleStateDirty()) {
                 UploadObstacleData(fieldCore.Obstacles);
             }
@@ -50,6 +52,8 @@ namespace MortiseFrame.Oboro.Sample.Inside {
             material.SetFloat(TimeValueId, elapsedTime);
             material.SetFloat(LineThicknessId, LineThickness);
             material.SetFloat(LineFeatherId, LineFeather);
+            material.SetFloat(DisturbanceIntensityId, disturbanceIntensity);
+            material.SetFloatArray(DisturbanceCurveId, disturbanceCurveSamples);
 
             material.SetPass(0);
             Graphics.DrawMeshNow(fullscreenMesh, Matrix4x4.identity);

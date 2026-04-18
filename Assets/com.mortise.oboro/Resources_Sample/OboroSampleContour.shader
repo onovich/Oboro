@@ -16,6 +16,7 @@ Shader "Hidden/Onovich/OboroSampleContour" {
 
             #define MAX_OBSTACLES 16
             #define MAX_CONTOURS 32
+            #define DISTURBANCE_CURVE_SAMPLES 32
 
             struct appdata {
                 float4 vertex : POSITION;
@@ -31,11 +32,13 @@ Shader "Hidden/Onovich/OboroSampleContour" {
             float _TimeValue;
             float _LineThickness;
             float _LineFeather;
+            float _DisturbanceIntensity;
             int _ObstacleCount;
             float4 _ObstacleData[MAX_OBSTACLES];
             int _ContourCount;
             float _ContourValues[MAX_CONTOURS];
             float4 _ContourColors[MAX_CONTOURS];
+            float _DisturbanceCurve[DISTURBANCE_CURVE_SAMPLES];
 
             v2f vert(appdata input) {
                 v2f output;
@@ -44,11 +47,22 @@ Shader "Hidden/Onovich/OboroSampleContour" {
                 return output;
             }
 
+            float SampleDisturbanceCurve(float normalized) {
+                float scaled = saturate(normalized) * (DISTURBANCE_CURVE_SAMPLES - 1);
+                int lowerIndex = (int)scaled;
+                int upperIndex = min(lowerIndex + 1, DISTURBANCE_CURVE_SAMPLES - 1);
+                float blend = scaled - lowerIndex;
+                return lerp(_DisturbanceCurve[lowerIndex], _DisturbanceCurve[upperIndex], blend);
+            }
+
             float EvaluateField(float2 pixelPosition) {
-                float value =
+                float rawValue =
                     (sin(pixelPosition.x * 0.002 + _TimeValue * 0.4) +
                      cos(pixelPosition.y * 0.0025 - _TimeValue * 0.3) +
                      sin((pixelPosition.x + pixelPosition.y) * 0.0015 + _TimeValue * 0.2)) * 1.5;
+
+                float normalizedDisturbance = saturate(rawValue / 9.0 + 0.5);
+                float value = (SampleDisturbanceCurve(normalizedDisturbance) - 0.5) * 9.0 * _DisturbanceIntensity;
 
                 [loop]
                 for (int index = 0; index < MAX_OBSTACLES; index++) {
