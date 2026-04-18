@@ -17,11 +17,11 @@
 
 根目录改名完成后，项目已经处于以下状态：
 - Unity 项目 `productName` 已改为 `Oboro`
-- 包目录已改为 `Assets/com.onovich.oboro`
-- 运行时程序集已改为 `Onovich.Oboro`
-- Sample 程序集已改为 `Onovich.Oboro.Sample`
+- 包目录已改为 `Assets/com.mortise.oboro`
+- 运行时程序集已改为 `MortiseFrame.Oboro`
+- Sample 程序集已改为 `MortiseFrame.Oboro.Sample`
 - 示例入口组件为 `OboroSampleEntry`
-- 示例入口场景为 `Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity`
+- 示例入口场景为 `Assets/com.mortise.oboro/Resources_Sample/SampleEntry.unity`
 - 根 README 已改为 Oboro 文案
 - Git 远端已改为：`git@github.com:onovich/Oboro.git`
 - 本地根目录已稳定运行在 `D:/UnityProjects/Oboro`
@@ -73,7 +73,7 @@
 
 因此：
 - 真正的业务入口只有一个：`OboroSampleEntry`
-- 推荐从 `Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity` 进入示例
+- 推荐从 `Assets/com.mortise.oboro/Resources_Sample/SampleEntry.unity` 进入示例
 - 不再依赖自动 Bootstrap，以免干扰上层用户测试
 
 ## 新 session 恢复提示词
@@ -87,11 +87,11 @@
 - 这是一个 Unity 2023.2.22f1 项目。
 - 项目原名是 SDFSample，现已重命名为 Oboro，中文名为朧。
 - 仓库远端已改为：`git@github.com:onovich/Oboro.git`。
-- 包目录已改为：`Assets/com.onovich.oboro`。
-- Runtime 程序集为：`Onovich.Oboro`。
-- Sample 程序集为：`Onovich.Oboro.Sample`。
+- 包目录已改为：`Assets/com.mortise.oboro`。
+- Runtime 程序集为：`MortiseFrame.Oboro`。
+- Sample 程序集为：`MortiseFrame.Oboro.Sample`。
 - 项目 README 已按 Choir 风格重写。
-- `OboroSampleEntry` 是实际示例组件，默认入口场景是 `Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity`。
+- `OboroSampleEntry` 是实际示例组件，默认入口场景是 `Assets/com.mortise.oboro/Resources_Sample/SampleEntry.unity`。
 - 之前已经完成 Oboro 命名替换、README 更新、Unity 批处理编译验证，以及推送到远端。
 - 关键提交包括：`20e79b5` 与 `4da06e9`。
 

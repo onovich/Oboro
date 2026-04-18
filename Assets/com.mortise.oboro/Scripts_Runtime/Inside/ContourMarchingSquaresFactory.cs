@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Onovich.Oboro.Inside {
+namespace MortiseFrame.Oboro.Inside {
 
     internal static class ContourMarchingSquaresFactory {
 

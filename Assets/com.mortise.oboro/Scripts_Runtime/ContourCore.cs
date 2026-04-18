@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Onovich.Oboro.Inside;
+using MortiseFrame.Oboro.Inside;
 
-namespace Onovich.Oboro {
+namespace MortiseFrame.Oboro {
 
     public class ContourCore {
 

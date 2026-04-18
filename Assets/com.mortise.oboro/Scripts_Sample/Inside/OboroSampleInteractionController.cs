@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Onovich.Oboro.Sample.Inside {
+namespace MortiseFrame.Oboro.Sample.Inside {
 
     internal class OboroSampleInteractionController {
 

@@ -3,11 +3,11 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace Onovich.Oboro.Editor {
+namespace MortiseFrame.Oboro.Editor {
 
     public static class OboroBatchValidation {
 
-        const string SampleScenePath = "Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity";
+        const string SampleScenePath = "Assets/com.mortise.oboro/Resources_Sample/SampleEntry.unity";
         const double SmokeDurationSeconds = 1.5d;
         const double SmokeTimeoutSeconds = 15d;
         const string SmokePendingKey = "OboroBatchValidation.SmokePending";

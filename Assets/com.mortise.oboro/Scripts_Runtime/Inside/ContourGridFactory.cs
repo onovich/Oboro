@@ -1,6 +1,6 @@
 using System;
 
-namespace Onovich.Oboro.Inside {
+namespace MortiseFrame.Oboro.Inside {
 
     internal static class ContourGridFactory {
 

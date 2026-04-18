@@ -5,6 +5,7 @@
 - Default: use this file only.
 - If a task needs architecture, business meaning, naming rationale, or restart handoff context, read `docs/assistant/project-context.md`.
 - If a task needs batch validation or smoke test commands, read `docs/assistant/validation-skill.md`.
+- If a task needs performance profiling or optimization baseline steps, read `docs/assistant/performance-skill.md`.
 - If a task is specifically about the local root rename session, read `docs/root-rename-session-handoff.md`.
 
 ## Project Snapshot
@@ -12,11 +13,11 @@
 - Unity version: `2023.2.22f1`
 - Project name: `Oboro` / `朧`
 - Old project name: `SDFSample`
-- Package path: `Assets/com.onovich.oboro`
-- Runtime assembly: `Onovich.Oboro`
-- Sample assembly: `Onovich.Oboro.Sample`
+- Package path: `Assets/com.mortise.oboro`
+- Runtime assembly: `MortiseFrame.Oboro`
+- Sample assembly: `MortiseFrame.Oboro.Sample`
 - Git remote: `git@github.com:onovich/Oboro.git`
-- Sample scene: `Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity`
+- Sample scene: `Assets/com.mortise.oboro/Resources_Sample/SampleEntry.unity`
 
 ## Architecture Rules
 
@@ -33,7 +34,7 @@
 - Match existing naming: PascalCase for types/methods, camelCase for fields/locals.
 - Keep methods short and readable; extract helpers when responsibilities diverge.
 - Avoid adding unnecessary frameworks, editor tooling, or configuration layers.
-- Preserve current namespace split: `Onovich.Oboro`, `Onovich.Oboro.Sample`, `Onovich.Oboro.*.Inside`.
+- Preserve current namespace split: `MortiseFrame.Oboro`, `MortiseFrame.Oboro.Sample`, `MortiseFrame.Oboro.*.Inside`.
 
 ## Product Intent
 

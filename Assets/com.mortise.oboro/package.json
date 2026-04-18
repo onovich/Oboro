@@ -1,12 +1,12 @@
 {
-    "name": "com.onovich.oboro",
+    "name": "com.mortise.oboro",
     "version": "0.0.1",
     "unity": "2023.2",
     "author": {
         "name": "onovich",
         "email": "onovich1110@gmail.com"
     },
-    "displayName": "Onovich.Oboro",
+    "displayName": "MortiseFrame.Oboro",
     "description": "An SDF contour rendering runtime and sample package inspired by blurred moonlight and fused boundaries.",
     "documentationURL": "https://github.com/onovich/Oboro",
     "hideInEditor": false,

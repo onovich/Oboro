@@ -1,7 +1,9 @@
 {
-    "name": "Onovich.Oboro",
-    "rootNamespace": "",
-    "references": [],
+    "name": "MortiseFrame.Oboro.Sample",
+    "rootNamespace": "MortiseFrame.Oboro.Sample",
+    "references": [
+        "MortiseFrame.Oboro"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

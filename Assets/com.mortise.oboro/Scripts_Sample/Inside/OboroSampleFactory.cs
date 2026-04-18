@@ -1,12 +1,12 @@
 using UnityEngine;
-using Onovich.Oboro;
+using MortiseFrame.Oboro;
 
-namespace Onovich.Oboro.Sample.Inside {
+namespace MortiseFrame.Oboro.Sample.Inside {
 
     internal static class OboroSampleFactory {
 
         internal const int GridResolution = 8;
-        internal const float BackgroundTimeStep = 0.02f;
+        internal const float BackgroundTimeStep = 0.01f;
         internal static readonly Color BackgroundColor = new Color(11f / 255f, 9f / 255f, 6f / 255f, 1f);
 
         internal static ContourLevelModel[] CreateContourLevels() {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Onovich.Oboro.Sample.Inside {
+namespace MortiseFrame.Oboro.Sample.Inside {
 
     internal sealed class OboroSampleGpuRendererCore {
 
@@ -98,7 +98,7 @@ namespace Onovich.Oboro.Sample.Inside {
         void UploadObstacleData(OboroSampleObstacleModel[] obstacles) {
             for (int i = 0; i < obstacles.Length; i++) {
                 var obstacle = obstacles[i];
-                obstacleData[i] = new Vector4(obstacle.x, obstacle.y, obstacle.radiusSquared * obstacle.intensity, obstacle.softCoreSquared);
+            obstacleData[i] = new Vector4(obstacle.x, obstacle.y, obstacle.radiusSquared * obstacle.intensity, obstacle.softCoreSquared);
             }
 
             material.SetInt(ObstacleCountId, obstacles.Length);

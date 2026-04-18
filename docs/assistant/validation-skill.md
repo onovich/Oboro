@@ -6,8 +6,8 @@
 
 - Unity 版本：`2023.2.22f1`
 - 项目根目录：`D:/UnityProjects/Oboro`
-- Sample 场景：`Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity`
-- 批处理验证入口：`Onovich.Oboro.Editor.OboroBatchValidation`
+- Sample 场景：`Assets/com.mortise.oboro/Resources_Sample/SampleEntry.unity`
+- 批处理验证入口：`MortiseFrame.Oboro.Editor.OboroBatchValidation`
 - 运行前必须关闭已打开当前项目的所有 Unity Editor 实例，否则批处理会因 project lock 失败
 - `CompileProject` 与 `PlayModeSmokeSampleEntry` 必须串行执行，不能并行运行两个 Unity batchmode 进程
 
@@ -17,7 +17,7 @@
 
 命令：
 
-`"D:/UnityEditors/Unity 2023.2.22f1/Editor/Unity.exe" -batchmode -nographics -projectPath "D:/UnityProjects/Oboro" -executeMethod Onovich.Oboro.Editor.OboroBatchValidation.CompileProject -quit -logFile "D:/UnityProjects/Oboro/Temp/oboro-compile.log"`
+`"D:/UnityEditors/Unity 2023.2.22f1/Editor/Unity.exe" -batchmode -nographics -projectPath "D:/UnityProjects/Oboro" -executeMethod MortiseFrame.Oboro.Editor.OboroBatchValidation.CompileProject -quit -logFile "D:/UnityProjects/Oboro/Temp/oboro-compile.log"`
 
 通过标准：
 
@@ -31,11 +31,11 @@
 
 命令：
 
-`"D:/UnityEditors/Unity 2023.2.22f1/Editor/Unity.exe" -batchmode -nographics -projectPath "D:/UnityProjects/Oboro" -executeMethod Onovich.Oboro.Editor.OboroBatchValidation.PlayModeSmokeSampleEntry -logFile "D:/UnityProjects/Oboro/Temp/oboro-smoke.log"`
+`"D:/UnityEditors/Unity 2023.2.22f1/Editor/Unity.exe" -batchmode -nographics -projectPath "D:/UnityProjects/Oboro" -executeMethod MortiseFrame.Oboro.Editor.OboroBatchValidation.PlayModeSmokeSampleEntry -logFile "D:/UnityProjects/Oboro/Temp/oboro-smoke.log"`
 
 该 smoke 测试会：
 
-1. 打开 `Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity`
+1. 打开 `Assets/com.mortise.oboro/Resources_Sample/SampleEntry.unity`
 2. 进入 PlayMode
 3. 短时间运行示例
 4. 监听 `Error` / `Exception` / `Assert`

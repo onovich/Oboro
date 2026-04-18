@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Onovich.Oboro {
+namespace MortiseFrame.Oboro {
 
     public class ContourRendererCore {
 

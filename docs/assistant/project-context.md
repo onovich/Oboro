@@ -8,7 +8,7 @@
 - 历史名：`SDFSample`
 - Unity 版本：`2023.2.22f1`
 - Git 远端：`git@github.com:onovich/Oboro.git`
-- 包目录：`Assets/com.onovich.oboro`
+- 包目录：`Assets/com.mortise.oboro`
 - README 已按 Choir 风格重写，项目当前对外定位是：
   - 一个可复用的 Unity SDF / 标量场等高线运行时
   - 一个可直接运行的动态视觉 Sample
@@ -50,10 +50,10 @@
 
 ### 4.1 总体分层
 
-- `Onovich.Oboro`
+- `MortiseFrame.Oboro`
   - 可复用运行时
   - 负责标量场网格、轮廓提取、轮廓绘制等通用能力
-- `Onovich.Oboro.Sample`
+- `MortiseFrame.Oboro.Sample`
   - 演示层
   - 负责参数、障碍布局、互动逻辑、自动启动体验
 - `*.Inside`
@@ -115,9 +115,9 @@
 - 类型、方法：`PascalCase`
 - 字段、局部变量：`camelCase`
 - Namespace：按边界分为
-  - `Onovich.Oboro`
-  - `Onovich.Oboro.Sample`
-  - `Onovich.Oboro.*.Inside`
+  - `MortiseFrame.Oboro`
+  - `MortiseFrame.Oboro.Sample`
+  - `MortiseFrame.Oboro.*.Inside`
 - 示例相关命名统一以 `OboroSample*` 开头，避免污染 runtime 概念。
 - 内部辅助类偏向 `internal` 或放在 `Inside` 命名空间中。
 

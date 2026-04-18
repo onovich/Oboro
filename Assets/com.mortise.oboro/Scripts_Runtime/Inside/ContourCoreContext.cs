@@ -1,4 +1,4 @@
-namespace Onovich.Oboro.Inside {
+namespace MortiseFrame.Oboro.Inside {
 
     internal class ContourCoreContext {
 

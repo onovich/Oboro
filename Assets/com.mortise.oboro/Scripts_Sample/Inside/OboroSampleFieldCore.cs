@@ -1,7 +1,7 @@
 using UnityEngine;
-using Onovich.Oboro;
+using MortiseFrame.Oboro;
 
-namespace Onovich.Oboro.Sample.Inside {
+namespace MortiseFrame.Oboro.Sample.Inside {
 
     internal class OboroSampleFieldCore {
 

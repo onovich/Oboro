@@ -46,14 +46,7 @@ Suitable for 2D scalar field / SDF contour effects, experimental visual sketches
 # Sample
 The sample entry component is:<br/>
 **示例入口组件位于：**
-* [Assets/com.onovich.oboro/Scripts_Sample/OboroSampleEntry.cs](Assets/com.onovich.oboro/Scripts_Sample/OboroSampleEntry.cs)
-
-The default sample scene is:<br/>
-**默认示例场景位于：**
-* [Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity](Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity)
-
-The current convention is to attach `OboroSampleEntry` explicitly in scene objects rather than auto-creating it through bootstrap logic.<br/>
-**当前约定是显式在场景对象上挂载 `OboroSampleEntry`，而不是通过自动 Bootstrap 逻辑隐式创建。**
+* [Assets/com.mortise.oboro/Scripts_Sample/OboroSampleEntry.cs](Assets/com.mortise.oboro/Scripts_Sample/OboroSampleEntry.cs)
 
 The sample currently shows:<br/>
 **当前示例主要展示：**
@@ -64,32 +57,5 @@ The sample currently shows:<br/>
 * Real-time contour updates while dragging obstacles.<br/>
 	**拖拽障碍体时的实时轮廓更新。**
 
-# Validation
-## Headless Compile
-Use Unity batchmode to validate import and script compilation.<br/>
-**可使用 Unity 批处理模式验证导入与脚本编译。**
-
-Please close all opened Unity Editor instances for `D:/UnityProjects/Oboro` before running batch validation.<br/>
-**运行前请先关闭所有已打开 `D:/UnityProjects/Oboro` 的 Unity Editor 实例。**
-
-`"D:/UnityEditors/Unity 2023.2.22f1/Editor/Unity.exe" -batchmode -nographics -projectPath "D:/UnityProjects/Oboro" -executeMethod Onovich.Oboro.Editor.OboroBatchValidation.CompileProject -quit -logFile "D:/UnityProjects/Oboro/Temp/oboro-compile.log"`
-
-## PlayMode Smoke Test
-Use the same batch validation entry to open the sample scene and run a headless PlayMode smoke test.<br/>
-**可使用同一个批处理验证入口打开示例场景，并执行无头 PlayMode smoke 测试。**
-
-`"D:/UnityEditors/Unity 2023.2.22f1/Editor/Unity.exe" -batchmode -nographics -projectPath "D:/UnityProjects/Oboro" -executeMethod Onovich.Oboro.Editor.OboroBatchValidation.PlayModeSmokeSampleEntry -logFile "D:/UnityProjects/Oboro/Temp/oboro-smoke.log"`
-
-This smoke test will:<br/>
-**该 smoke 测试会：**
-* Open `Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity`.<br/>
-	**打开 `Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity`；**
-* Enter PlayMode and run briefly.<br/>
-	**进入 PlayMode 并短时间运行；**
-* Monitor `Error` / `Exception` / `Assert` logs.<br/>
-	**监听 `Error` / `Exception` / `Assert` 日志；**
-* Exit successfully when no runtime error is detected.<br/>
-	**在未发现运行时错误时成功退出。**
-
 # UPM URL
-ssh://git@github.com/onovich/Oboro.git?path=/Assets/com.onovich.oboro#main
+ssh://git@github.com/onovich/Oboro.git?path=/Assets/com.mortise.oboro#main

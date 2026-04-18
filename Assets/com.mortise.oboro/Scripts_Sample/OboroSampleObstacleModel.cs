@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Onovich.Oboro.Sample {
+namespace MortiseFrame.Oboro.Sample {
 
     [Serializable]
     public class OboroSampleObstacleModel {

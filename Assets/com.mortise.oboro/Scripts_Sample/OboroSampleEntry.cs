@@ -1,8 +1,8 @@
 using UnityEngine;
-using Onovich.Oboro;
-using Onovich.Oboro.Sample.Inside;
+using MortiseFrame.Oboro;
+using MortiseFrame.Oboro.Sample.Inside;
 
-namespace Onovich.Oboro.Sample {
+namespace MortiseFrame.Oboro.Sample {
 
     [DefaultExecutionOrder(-1000)]
     public class OboroSampleEntry : MonoBehaviour {
