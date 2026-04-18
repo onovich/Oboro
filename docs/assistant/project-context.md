@@ -143,14 +143,33 @@
 
 - 默认远端：`git@github.com:onovich/Oboro.git`
 - 主分支：`main`
-- 提交信息建议保持简洁、面向结果，推荐格式：
+- 提交信息是强约束，不再只是建议。
+- 必须使用以下格式之一：
   - `<type>: <summary>`
-  - 例如：`feat: add batch smoke validation`
-  - 例如：`refactor: remove sample bootstrap`
-  - 例如：`docs: sync validation workflow`
-- 推荐 `type`：`feat`、`fix`、`refactor`、`docs`、`test`、`chore`
-- summary 尽量用英文短句，聚焦一个改动主题，不堆叠多个无关事项。
-- 如果一次改动同时涉及代码与文档，优先按“主改动”归类，而不是机械拆分。
+  - `<type>(<scope>): <summary>`
+- 合法 `type`：`feat`、`fix`、`refactor`、`perf`、`docs`、`test`、`chore`、`ci`、`revert`
+- `scope` 可选，但如果写了，必须使用小写单词或短横线，例如：`sample`、`runtime`、`validation`、`render`
+- `summary` 要求：
+  - 使用英文短句
+  - 首字母小写
+  - 聚焦单一结果
+  - 通常不超过 72 个字符
+- 禁止：
+  - `wip`
+  - `update stuff`
+  - `misc fixes`
+  - 一个 message 同时概括多个互不相关改动
+- 例如：
+  - `feat: add batch smoke validation`
+  - `refactor(sample): remove bootstrap entry`
+  - `fix(render): align gpu sample hit area`
+- 不使用本地 git hook 强制提交格式；这里更偏向由 AI agent 在提交前做工作流自检。
+- 提交前流程固定为：
+  1. 先看 `git status --short`
+  2. 确认 staged diff 只对应一个主题
+  3. 由 agent 先确定一个符合规则的 commit message
+  4. 如果变更仍混杂多个主题，先拆分而不是硬写一个笼统 message
+  5. 如需验证 Unity，先 compile，再 smoke，且串行执行
 
 ## 7. 验证工作流约定
 

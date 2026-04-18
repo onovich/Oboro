@@ -55,3 +55,19 @@
 - Never run more than one Unity batchmode validation against this project at the same time.
 - Always run `CompileProject` and `PlayModeSmokeSampleEntry` sequentially, never in parallel.
 - If the Unity Editor already has this project open, do not start batch validation until the editor is closed.
+
+## Commit Workflow
+
+- Commit messages are not a suggestion; they must match the repository rule.
+- Allowed format: `<type>(<scope>): <summary>` or `<type>: <summary>`.
+- Allowed `type`: `feat`, `fix`, `refactor`, `perf`, `docs`, `test`, `chore`, `ci`, `revert`.
+- `scope` is optional, lowercase, and should describe one area such as `sample`, `runtime`, `docs`, `validation`, or `render`.
+- `summary` must be a short English phrase, lowercase-first, focused on one result, and normally stay within 72 characters.
+- Do not use vague subjects such as `update stuff`, `misc fixes`, `wip`, or mixed unrelated changes in one message.
+- Before any commit, review `git status` and make sure the staged diff matches one coherent change.
+- Prefer flexible enforcement through the AI agent workflow, not through local git hooks.
+- Before the agent creates a commit, it should:
+	1. review `git status --short`
+	2. confirm the staged diff is a single topic
+	3. choose one compliant commit message before running `git commit`
+	4. avoid committing if the changeset still mixes unrelated work
