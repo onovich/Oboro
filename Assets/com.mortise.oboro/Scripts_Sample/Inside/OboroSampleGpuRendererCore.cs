@@ -78,9 +78,9 @@ namespace MortiseFrame.Oboro.Sample.Inside {
         }
 
         void EnsureBuffers(OboroSampleFieldCore fieldCore) {
-            OboroSampleObstacleModel[] obstacles = fieldCore.Obstacles;
-            if (obstacleData == null || obstacleData.Length != obstacles.Length) {
-                obstacleData = new Vector4[obstacles.Length];
+            IReadOnlyList<OboroSampleObstacleModel> obstacles = fieldCore.Obstacles;
+            if (obstacleData == null || obstacleData.Length != obstacles.Count) {
+                obstacleData = new Vector4[obstacles.Count];
             }
 
             ContourLevelModel[] levels = fieldCore.ContourLevels;
