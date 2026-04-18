@@ -5,8 +5,8 @@ namespace Onovich.Oboro.Sample.Inside {
     internal sealed class OboroSampleGpuRendererCore {
 
         const string ShaderName = "Hidden/Onovich/OboroSampleContour";
-        const float LineThickness = 0.045f;
-        const float LineFeather = 0.03f;
+        const float LineThickness = 0.85f;
+        const float LineFeather = 0.75f;
 
         static readonly int ScreenSizeId = Shader.PropertyToID("_ScreenSize");
         static readonly int TimeValueId = Shader.PropertyToID("_TimeValue");
@@ -115,10 +115,10 @@ namespace Onovich.Oboro.Sample.Inside {
             };
             fullscreenMesh.hideFlags = HideFlags.HideAndDontSave;
             fullscreenMesh.vertices = new[] {
-                new Vector3(-1f, -1f, 0f),
-                new Vector3(1f, -1f, 0f),
+                new Vector3(0f, 0f, 0f),
+                new Vector3(1f, 0f, 0f),
                 new Vector3(1f, 1f, 0f),
-                new Vector3(-1f, 1f, 0f)
+                new Vector3(0f, 1f, 0f)
             };
             fullscreenMesh.uv = new[] {
                 new Vector2(0f, 0f),
@@ -127,6 +127,7 @@ namespace Onovich.Oboro.Sample.Inside {
                 new Vector2(0f, 1f)
             };
             fullscreenMesh.triangles = new[] { 0, 1, 2, 0, 2, 3 };
+            fullscreenMesh.RecalculateBounds();
             fullscreenMesh.UploadMeshData(true);
         }
 

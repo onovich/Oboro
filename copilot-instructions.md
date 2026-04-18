@@ -49,3 +49,9 @@
 - Batchmode Unity compile under the new path was rechecked successfully on `2026-04-18`.
 - Most remaining old-path references are expected only in Unity-generated caches, logs, or local layouts.
 - `OboroSampleBootstrap` has been removed; the sample entry is now scene-owned.
+
+## Validation Workflow
+
+- Never run more than one Unity batchmode validation against this project at the same time.
+- Always run `CompileProject` and `PlayModeSmokeSampleEntry` sequentially, never in parallel.
+- If the Unity Editor already has this project open, do not start batch validation until the editor is closed.

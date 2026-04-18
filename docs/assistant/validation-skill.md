@@ -9,6 +9,7 @@
 - Sample 场景：`Assets/com.onovich.oboro/Resources_Sample/SampleEntry.unity`
 - 批处理验证入口：`Onovich.Oboro.Editor.OboroBatchValidation`
 - 运行前必须关闭已打开当前项目的所有 Unity Editor 实例，否则批处理会因 project lock 失败
+- `CompileProject` 与 `PlayModeSmokeSampleEntry` 必须串行执行，不能并行运行两个 Unity batchmode 进程
 
 ## 1. 无头编译
 
@@ -52,6 +53,8 @@
 - 改动 Runtime 算法、Sample 场逻辑、场景入口或渲染流程后，优先跑 compile + smoke。
 - 只改文档时通常不需要跑 smoke。
 - 如果只是 Unity 本地缓存或布局残留，不要把这类问题误判成源码错误。
+- 推荐顺序固定为：先 `CompileProject`，确认结束后再跑 `PlayModeSmokeSampleEntry`。
+- 不要并行起两个 Unity 验证命令，否则很容易因为 project lock 造成假失败。
 
 ## 4. 常见结论模板
 

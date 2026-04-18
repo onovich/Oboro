@@ -66,8 +66,9 @@ Shader "Hidden/Onovich/OboroSampleContour" {
             }
 
             fixed4 frag(v2f input) : SV_Target {
-                float2 pixelPosition = input.uv * _ScreenSize.xy;
+                float2 pixelPosition = float2(input.uv.x * _ScreenSize.x, (1.0 - input.uv.y) * _ScreenSize.y);
                 float field = EvaluateField(pixelPosition);
+                float fieldWidth = max(fwidth(field), 1e-4);
 
                 float totalAlpha = 0.0;
                 float3 weightedColor = 0.0;
@@ -79,8 +80,8 @@ Shader "Hidden/Onovich/OboroSampleContour" {
                     }
 
                     float level = _ContourValues[index];
-                    float distanceToLevel = abs(field - level);
-                    float band = 1.0 - smoothstep(_LineThickness, _LineThickness + _LineFeather, distanceToLevel);
+                    float distanceToLevelInPixels = abs(field - level) / fieldWidth;
+                    float band = 1.0 - smoothstep(_LineThickness, _LineThickness + _LineFeather, distanceToLevelInPixels);
                     float4 contourColor = _ContourColors[index];
                     float alpha = contourColor.a * band;
                     weightedColor += contourColor.rgb * alpha;
